@@ -12,14 +12,14 @@ const { name, version } = require('../package.json')
 program.name(name).usage('<command> [option]')
 program.version(version, '-v,--version')
   .option('-a,--add', 'add something')
-
 program
   .command('create <project-name>')
   .description('create a new project')
   .option('-f,--force', 'overwrite target directory if it exists')
   .action((projectName, cmd) => {
-    console.log(projectName, cmd);
+    require('../lib/create')(projectName,cmd)
   })
+
 
 program.parse(process.argv);
 // console.log('You choose: ');
@@ -59,25 +59,25 @@ program.parse(process.argv);
 //   console.log('data', data);
 // })
 
-const spinner = ora('Loading unicorns')
-spinner.start();
-setTimeout(() => {
-  spinner.color = 'yellow'
-  spinner.text = 'Loading rainbows'
-  setTimeout(() => {
-    spinner.succeed();
-  }, 1000)
-}, 1000)
+// const spinner = ora('Loading unicorns')
+// spinner.start();
+// setTimeout(() => {
+//   spinner.color = 'yellow'
+//   spinner.text = 'Loading rainbows'
+//   setTimeout(() => {
+//     spinner.succeed();
+//   }, 1000)
+// }, 1000)
 
-// spinner.fail()
+// // spinner.fail()
 
-console.log(
-  "\r\n" +
-  figlet.textSync('YANG', {
-    font: 'Doom',
-    horizontalLayout: 'full',
-    verticalLayout: 'default',
-    width: 180,
-    whitespaceBreak: true
-  })
-);
+// console.log(
+//   "\r\n" +
+//   figlet.textSync('YANG', {
+//     font: 'Doom',
+//     horizontalLayout: 'full',
+//     verticalLayout: 'default',
+//     width: 180,
+//     whitespaceBreak: true
+//   })
+// );
