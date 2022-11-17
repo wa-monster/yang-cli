@@ -11,17 +11,37 @@ const { name, version } = require('../package.json')
 // 设置首行提示
 program.name(name).usage('<command> [option]')
 program.version(version, '-v,--version')
-  .option('-a,--add', 'add something')
 program
   .command('create <project-name>')
   .description('create a new project')
   .option('-f,--force', 'overwrite target directory if it exists')
   .action((projectName, cmd) => {
-    require('../lib/create')(projectName,cmd)
+    require('../lib/create')(projectName, cmd)
   })
 
+program
+  .command('config [value]')
+  .description('inspect and modify the config')
+  .option('-g,--get <key>', 'get value by key')
+  .option('-s,--set <key> <value>', 'set option[key] is value')
+  .option('-d,--del <key> ', 'delete option by value')
+  .action((value, key) => {
+    console.log(value, key);
+  })
+
+// 监听使用了什么命令
+program.on('--help', function () {
+  console.log();
+  console.log(
+    ` Run ${chalk.cyan("yang <command> --help")} for detailed usage of given command. `
+  );
+  console.log();
+});
 
 program.parse(process.argv);
+
+
+
 // console.log('You choose: ');
 // console.log(`hello ${chalk.blue('world')}`);
 // console.log(chalk.bgBlue.red("Hello world!"));
