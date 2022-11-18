@@ -1,65 +1,65 @@
 #!/usr/bin/env node
 
-const program = require('commander')
-const chalk = require('chalk')
-const Inquirer = require('inquirer')
+const program = require("commander");
+const chalk = require("chalk");
+const Inquirer = require("inquirer");
 
-const fsExtra = require('fs-extra')
-const figlet = require('figlet')
-const { name, version } = require('../package.json')
+const fsExtra = require("fs-extra");
+const figlet = require("figlet");
+const { name, version } = require("../package.json");
 console.log(
   "\r\n" +
-  figlet.textSync('YANG-CLI', {
-    font: '3D-ASCII',
-    horizontalLayout: 'full',
-    verticalLayout: 'default',
-    width: 180,
-    whitespaceBreak: true
-  })
+    figlet.textSync("YANG-CLI", {
+      font: "3D-ASCII",
+      horizontalLayout: "full",
+      verticalLayout: "default",
+      width: 180,
+      whitespaceBreak: true,
+    })
 );
 // 设置首行提示
-program.name(name).usage('<command> [option]')
-program.version(version, '-v,--version')
+program.name(name).usage("<command> [option]");
+program.version(version, "-v,--version");
 program
-  .command('create <project-name>')
-  .description('create a new project')
-  .option('-f,--force', 'overwrite target directory if it exists')
+  .command("create <project-name>")
+  .description("create a new project")
+  .option("-f,--force", "overwrite target directory if it exists")
   .action((projectName, cmd) => {
-    require('../lib/create')(projectName, cmd)
-  })
+    require("../lib/create")(projectName, cmd);
+  });
 
 program
-  .command('config [value]')
-  .description('inspect and modify the config')
-  .option('-g,--get <key>', 'get value by key')
-  .option('-s,--set <key> <value>', 'set option[key] is value')
-  .option('-d,--del <key> ', 'delete option by value')
+  .command("config [value]")
+  .description("inspect and modify the config")
+  .option("-g,--get <key>", "get value by key")
+  .option("-s,--set <key> <value>", "set option[key] is value")
+  .option("-d,--del <key> ", "delete option by value")
   .action((value, key) => {
     console.log(value, key);
-  })
+  });
 
 // 监听使用了什么命令
-program.on('--help', function () {
+program.on("--help", function () {
   console.log();
-  console.log()
+  console.log();
   console.log(
-    ` Run ${chalk.cyan("yang <command> --help")} for detailed usage of given command. `
+    ` Run ${chalk.cyan(
+      "yang <command> --help"
+    )} for detailed usage of given command. `
   );
   console.log(
     "\r\n" +
-    figlet.textSync('YANG-CLI', {
-      font: '3D-ASCII',
-      horizontalLayout: 'full',
-      verticalLayout: 'default',
-      width: 180,
-      whitespaceBreak: true
-    })
+      figlet.textSync("YANG-CLI", {
+        font: "3D-ASCII",
+        horizontalLayout: "full",
+        verticalLayout: "default",
+        width: 180,
+        whitespaceBreak: true,
+      })
   );
 });
 
 program.parse(process.argv);
-
-
 
 // console.log('You choose: ');
 // console.log(`hello ${chalk.blue('world')}`);
@@ -109,4 +109,3 @@ program.parse(process.argv);
 // }, 1000)
 
 // // spinner.fail()
-
