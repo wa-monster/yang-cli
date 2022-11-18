@@ -3,11 +3,20 @@
 const program = require('commander')
 const chalk = require('chalk')
 const Inquirer = require('inquirer')
-const ora = require('ora')
+
 const fsExtra = require('fs-extra')
 const figlet = require('figlet')
 const { name, version } = require('../package.json')
-
+console.log(
+  "\r\n" +
+  figlet.textSync('YANG-CLI', {
+    font: '3D-ASCII',
+    horizontalLayout: 'full',
+    verticalLayout: 'default',
+    width: 180,
+    whitespaceBreak: true
+  })
+);
 // 设置首行提示
 program.name(name).usage('<command> [option]')
 program.version(version, '-v,--version')
@@ -32,10 +41,20 @@ program
 // 监听使用了什么命令
 program.on('--help', function () {
   console.log();
+  console.log()
   console.log(
     ` Run ${chalk.cyan("yang <command> --help")} for detailed usage of given command. `
   );
-  console.log();
+  console.log(
+    "\r\n" +
+    figlet.textSync('YANG-CLI', {
+      font: '3D-ASCII',
+      horizontalLayout: 'full',
+      verticalLayout: 'default',
+      width: 180,
+      whitespaceBreak: true
+    })
+  );
 });
 
 program.parse(process.argv);
@@ -91,13 +110,3 @@ program.parse(process.argv);
 
 // // spinner.fail()
 
-// console.log(
-//   "\r\n" +
-//   figlet.textSync('YANG', {
-//     font: 'Doom',
-//     horizontalLayout: 'full',
-//     verticalLayout: 'default',
-//     width: 180,
-//     whitespaceBreak: true
-//   })
-// );
